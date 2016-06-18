@@ -73,11 +73,7 @@
 \begin_body
 
 \begin_layout Title
-Leicester FC tra 
-\emph on
-Fabula
-\emph default
- ed Epistemologia
+Come il Leicester ha vinto la Premier League?
 \end_layout
 
 \begin_layout Author
@@ -104,8 +100,12 @@ La storia del Leicester FC è forse una tra le più belle del calcio moderno.
  sport quanto nella vita di ognuno di noi.
 \end_layout
 
+\begin_layout Part
+La storia del Leicester
+\end_layout
+
 \begin_layout Section
-La storia
+La città
 \end_layout
 
 \begin_layout Standard
@@ -269,26 +269,33 @@ a (oltre che molti gol) alla squadra e che ha permesso di vincere un numero
 Da gennaio in poi, il Leicester è sempre rimasto in prima posizione.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Part
 Modelli matematici per il calcio
 \end_layout
 
 \begin_layout Standard
 Una partita di calcio, come pressapoco qualsiasi cosa del nostro mondo,
- può essere vista come un insieme di moltissime informazioni, dati: il numero
- di passaggi riusciti, il numero di goal, i giocatori schierati, la media
- di gol subiti, il numero di espulsioni, l'umore della squadra...
- dati che possono essere analizzati grazie ad un computer, e riutilizzati
- per osservare eventuali pattern che possono emergere.
+ può essere vista come un insieme di moltissime informazioni o dati: il
+ numero di passaggi riusciti, il numero di goal, i giocatori schierati,
+ la media di gol subiti, il numero di espulsioni, l'umore della squadra...
+ dati che entro certi limiti possono essere analizzati grazie ad un computer,
+ e riutilizzati per osservare eventuali pattern che possono emergere.
  Quasi tutto è quantificabile, nel calcio: ciò, come vedremo, non significa
- che tutto è prevedibile, nel calcio.
+ che tutto è prevedibile.
  
 \end_layout
 
 \begin_layout Standard
 Di seguito, descriverò il percorso che ho seguito per creare un programma
- scritto in Python che possa simulare una stagione di Premier League basandosi
- sullo storico degli anni scorsi.
+ scritto in linguaggio Python che possa simulare una stagione di Premier
+ League basandosi sullo storico degli anni passati.
 \end_layout
 
 \begin_layout Section
@@ -335,7 +342,7 @@ Purtroppo, per quanto riguarda le statistiche calcistiche non vi è grande
 \begin_layout Standard
 Dopo un po' di ricerche, sono incappato nel sito https://github.com/footballcsv/e
 ng-england, dove gratuitamente si trovano i risultati di tutte le partite
- di campionato inglese dal 1880 al 2014 in formato .csv.
+ di campionato inglese dal 1880 al 2015 in formato .csv.
  Gratificante.
 \end_layout
 
@@ -405,6 +412,16 @@ fattore casa
 \end_inset
 
 , il rapporto gol segnati/subiti da ciascuna squadra e così via.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Questi dati si riferiscono alla stagione 2014-2015.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -415,27 +432,32 @@ status open
 
 \begin_layout Plain Layout
 
-Stats.MATCHES   =  381	
+Stats.MATCHES   =  380 
 \end_layout
 
 \begin_layout Plain Layout
 
-Stats.HOME_ADVG =  0.5065616797900262	
+Stats.HOME_ADVG =  0.45263157894736844 
 \end_layout
 
 \begin_layout Plain Layout
 
-Stats.TOT_GOALS =  1053	
+Stats.TOT_GOALS =  975 
 \end_layout
 
 \begin_layout Plain Layout
 
-Stats.AVG_GM_H  =  1.6929133858267718	
+Stats.AVG_GM_H  =  1.4736842105263157 
 \end_layout
 
 \begin_layout Plain Layout
 
-Stats.AVG_GM_T  =  1.0708661417322836
+Stats.AVG_GM_T  =  1.0921052631578947 
+\end_layout
+
+\begin_layout Plain Layout
+
+Stats.AVG_GM_P  =  2.5657894736842106 
 \end_layout
 
 \end_inset
@@ -451,7 +473,7 @@ Queste statistiche, che all'apparenza sembrano irrilevanti e solo curiose,
 \end_layout
 
 \begin_layout Standard
-Nella tabella 1 qui di seguito ci sono invece le statistiche di ogni squadra.
+Nell'allegato numero 1 vi sono invece le statistiche di ogni squadra.
  Gli acronimi sono: 
 \end_layout
 
@@ -476,200 +498,7 @@ T (transfert) = fuori casa.
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{table}[] 
-\backslash
-centering 
-\backslash
-caption{Statistiche per squadra} 
-\backslash
-label{my-label} 
-\backslash
-begin{tabular}{|l|l|l|l|l|l|l|l|l|} 
-\backslash
-hline Nome & gm
-\backslash
-_h & gm
-\backslash
-_t & gs
-\backslash
-_h & gs
-\backslash
-_t & avg
-\backslash
-_gm
-\backslash
-_h & avg
-\backslash
-_gm
-\backslash
-_t & avg
-\backslash
-_gs
-\backslash
-_h & avg
-\backslash
-_gs
-\backslash
-_t 
-\backslash
-
-\backslash
- 
-\backslash
-hline Arsenal & 48 & 35 & 15 & 26 & 2.53 & 1.84 & 0.79 & 1.37 
-\backslash
-
-\backslash
- 
-\backslash
-hline Aston Villa & 29 & 23 & 16 & 23 & 1.53 & 1.21 & 0.84 & 1.21 
-\backslash
-
-\backslash
- 
-\backslash
-hline Birmingham & 19 & 19 & 13 & 34 & 1.0 & 1.0 & 0.68 & 1.79 
-\backslash
-
-\backslash
- 
-\backslash
-hline Blackburn & 28 & 13 & 18 & 37 & 1.47 & 0.68 & 0.95 & 1.95 
-\backslash
-
-\backslash
- 
-\backslash
-hline Bolton & 26 & 16 & 31 & 36 & 1.37 & 0.84 & 1.63 & 1.89 
-\backslash
-
-\backslash
- 
-\backslash
-hline Burnley & 25 & 17 & 30 & 52 & 1.32 & 0.89 & 1.58 & 2.74 
-\backslash
-
-\backslash
- 
-\backslash
-hline Chelsea & 68 & 35 & 14 & 18 & 3.58 & 1.84 & 0.74 & 0.95 
-\backslash
-
-\backslash
- 
-\backslash
-hline Everton & 35 & 25 & 21 & 28 & 1.84 & 1.32 & 1.11 & 1.47 
-\backslash
-
-\backslash
- 
-\backslash
-hline Fulham & 27 & 12 & 15 & 31 & 1.42 & 0.63 & 0.79 & 1.63 
-\backslash
-
-\backslash
- 
-\backslash
-hline Hull & 22 & 12 & 29 & 46 & 1.16 & 0.63 & 1.53 & 2.42 
-\backslash
-
-\backslash
- 
-\backslash
-hline Liverpool & 43 & 18 & 15 & 20 & 2.26 & 0.95 & 0.79 & 1.05 
-\backslash
-
-\backslash
- 
-\backslash
-hline Man City & 41 & 32 & 20 & 25 & 2.16 & 1.68 & 1.05 & 1.32 
-\backslash
-
-\backslash
- 
-\backslash
-hline Man United & 52 & 34 & 12 & 16 & 2.74 & 1.79 & 0.63 & 0.84 
-\backslash
-
-\backslash
- 
-\backslash
-hline Portsmouth & 24 & 10 & 32 & 34 & 1.26 & 0.53 & 1.68 & 1.79 
-\backslash
-
-\backslash
- 
-\backslash
-hline Stoke & 24 & 10 & 21 & 27 & 1.26 & 0.53 & 1.11 & 1.42 
-\backslash
-
-\backslash
- 
-\backslash
-hline Sunderland & 32 & 16 & 19 & 37 & 1.68 & 0.84 & 1.0 & 1.95 
-\backslash
-
-\backslash
- 
-\backslash
-hline Tottenham & 40 & 27 & 12 & 29 & 2.11 & 1.42 & 0.63 & 1.53 
-\backslash
-
-\backslash
- 
-\backslash
-hline West Ham & 30 & 17 & 29 & 37 & 1.58 & 0.89 & 1.53 & 1.95 
-\backslash
-
-\backslash
- 
-\backslash
-hline Wigan & 19 & 18 & 24 & 55 & 1.0 & 0.95 & 1.26 & 2.89 
-\backslash
-
-\backslash
- 
-\backslash
-hline Wolves & 13 & 19 & 22 & 34 & 0.68 & 1.0 & 1.16 & 1.79 
-\backslash
-
-\backslash
- 
-\backslash
-hline 
-\backslash
-end{tabular} 
-\backslash
-end{table}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Possiamo osservare alcune cose interessanti.
- Le squadre con la media più alta di goal (in casa e fuori) sono quelle
- effettivamente più forti (Chelsea, Arsenal, United...), mentre quelle le cui
- ultime due caselle contengono valori più alti sono quelle che subiscono
- più gol, in casa e fuori, quindi le squadre teoricamente più 
-\begin_inset Quotes eld
-\end_inset
-
-deboli
-\begin_inset Quotes erd
-\end_inset
-
- (Burnley, Hull, due squadre che a fine stagione saranno retrocesse).
- Si nota che c'è una differenza più o meno ampia tra i gol segnati e subiti
+Si nota che c'è una differenza più o meno ampia tra i gol segnati e subiti
  in casa e in trasferta: segno che è importante considerare quello che prima
  definivo come 
 \begin_inset Quotes eld
@@ -759,6 +588,10 @@ La dimostrazione scritta bene in latex
 \end_layout
 
 \begin_layout Standard
+DIMOSTRAZIONE CAZZO
+\end_layout
+
+\begin_layout Standard
 Quindi, la formula per la distribuzione poissoniana:
 \end_layout
 
@@ -773,92 +606,117 @@ P_{k}=e^{-\lambda}\frac{\lambda^{k}}{k!}
 
 \end_layout
 
+\begin_layout Standard
+dove:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $e$
+\end_inset
+
+ è il numero di Nepero 
+\begin_inset Formula $\approx$
+\end_inset
+
+ 2,71828 18284...
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\lambda$
+\end_inset
+
+ è il numero medio di eventi favorevoli nell'unità di tempo
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $k$
+\end_inset
+
+ è il numero di casi favorevoli di cui si vuole la probabilità
+\end_layout
+
 \begin_layout Subsection
-Esempio di utilizzo della distribuzione di Poisson
+La distribuzione di Poisson applicata al calcio
 \end_layout
 
 \begin_layout Standard
-Ogni ora passano per un casello autostradale 300 auto.
-\end_layout
-
-\begin_layout Enumerate
-Qual è la probabilità che nessun veicolo passi in un minuto?
-\end_layout
-
-\begin_layout Enumerate
-Qual è il numero medio di veicoli ogni due minuti?
-\end_layout
-
-\begin_layout Enumerate
-Qual è la probabilità che il numero di veicoli 2.
- passi effettivamente per il casello in due minuti?
-\end_layout
-
-\begin_layout Standard
-In questo caso: 
-\begin_inset Formula $\lambda_{1}$
+Storicamente, il primo utilizzo della distribuzione di Poisson risale al
+ calcolo di morti per cadute da cavallo nell'esercito prussiano.
+ Oggigiorno, è più frequente vederla utilizzata per prevedere il numero
+ di chiamate che un call center riceverà in un determinato 
+\begin_inset Formula $\triangle t$
 \end_inset
 
-è 
-\begin_inset Formula $\frac{300}{60min}=\frac{5}{min}$
-\end_inset
-
-, la media dei veicoli per minuto.
+, il numero di macchine che passano per un casello autostradale e così via.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-p=\frac{e^{-5}5^{0}}{0!}=e^{-5}\approx0.00674
-\end{equation}
+Anche per il calcio è possibile sviluppare un modello basato su Poisson.
+ Vediamo come si articolerebbe per simulare l'esito di una sola partita,
+ attraverso l'algoritmo che ho elaborato.
+\end_layout
 
-\end_inset
-
-
+\begin_layout Subsubsection
+Una partita
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\lambda_{2}=5\,2=10
-\end{equation}
-
+Per poter applicare Poisson, dobbiamo essere a conoscenza del parametro
+ 
+\begin_inset Formula $\lambda$
 \end_inset
 
-
+ e con esso applicare la formula per vari valori di k: k è il numero di
+ gol segnati durante la partita e 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+P_k la probabilità che k gol vengano segnati.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-p=\frac{e^{-10}10^{10}}{10!}=0.125
-\end{equation}
+Immaginiamo quindi di simulare una partita tra Leicester e Manchester United
+ (evidenziate nella tabella 1), con il Leicester che gioca in casa.
+\end_layout
 
+\begin_layout Subsubsection
+Il calcolo di 
+\begin_inset Formula $\lambda$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-Vi è, quindi, il 12.5% di probabilità che in due minuti il numero di macchine
- che passano il casello corrisponda esattamente alla media.
- Si può estrapolare una funzione 
-\begin_inset Formula $p(x)$
+Abbiamo definito 
+\begin_inset Formula $\lambda$
 \end_inset
 
-, dove x è il numero di macchine che vogliamo vedere attraverso il casello
- in un determinato periodo di tempo (manteniamo 2 minuti) e p è la probabilità
- che davvero questo numero di macchine passi per il casello nel delta t.
-\end_layout
+ come media degli eventi favorevoli nell'unità di tempo.
+ Questo valore deve anche rappresentare, contemporaneamente, la forza d'attacco
+ della squadra 1 e l'abilità in difesa della squadra 2.
+ Definiamo quindi 
+\begin_inset Formula $\lambda$
+\end_inset
 
-\begin_layout Standard
-La funzione è:
+ come
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-p(x)=\frac{e^{-10}10^{x}}{x!}
+\lambda_{1}=atk_{1}\cdot dif_{2}\cdot avg_{goal/campionato}
 \]
 
 \end_inset
@@ -867,224 +725,889 @@ p(x)=\frac{e^{-10}10^{x}}{x!}
 \end_layout
 
 \begin_layout Standard
-e il grafico che se ne deriva è:
+\begin_inset Formula 
+\[
+\lambda_{2}=atk_{2}\cdot dif_{1}\cdot avg_{goal/campionato}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-\begin_inset Graphics
-	filename graph.jpg
-	lyxscale 50
-	scale 40
-
+Che cosa sono, però, i parametri 
+\begin_inset Formula $atk$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Part
-Epistemologia
-\end_layout
-
-\begin_layout Standard
-Qualcuno ha detto che il calcio è una metafora della vita; probabilmente,
- chi lo ha detto non conosceva Popper né alcun altro degli epistemologi
- moderni, eppure ha espresso, forse inconsciamente, un parallelismo con
- le idee del filosofo viennese.
- 
-\end_layout
-
-\begin_layout Section
-Il calcio è così imprevedibile?
-\end_layout
-
-\begin_layout Subsection
-Elementi di casualità
-\end_layout
-
-\begin_layout Standard
-È almeno dal 1950 che vi sono degli studi statistici che tentano di trovare
- dei pattern nei risultati delle partite di qualsiasi sport: baseball, football
- americano, rugby, calcio, ciclismo...
- mediante alcune osservazioni si è scoperto che ogni sport ha, per così
- dire, un certo 
-\begin_inset Quotes eld
-\end_inset
-
-grado di casualità
-\begin_inset Quotes erd
-\end_inset
-
-, intrinseco.
- È più semplice prevedere e azzeccare il risultato di una partita di rugby
- o di football piuttosto che di una di calcio o l'ordine di arrivo di una
- gara ciclistica; cosa dà ad ogni sport il suo 
-\begin_inset Quotes eld
-\end_inset
-
-grado di casualità
-\begin_inset Quotes erd
+ e 
+\begin_inset Formula $def$
 \end_inset
 
 ?
 \end_layout
 
 \begin_layout Standard
-Intendiamoci: in ogni sport possono avvenire dei miracoli.
- Casi come quello del Leicester sono avvenuti anche nel basket (Verona,
- 1986), nel pattinaggio su ghiacco (Steve Bradbury, 1996 (?)), nel rugby
- (?) e via dicendo.
+L'attacco deve rappresentare il rapporto tra la media di gol segnati per
+ partita di una squadra e la media di gol di tutte le squadre: più alto
+ è il rapporto, maggiori sono i gol segnati per partita rispetto alla media
+ delle altre squadre.
+ In breve:
 \end_layout
 
 \begin_layout Standard
-Il calcio, da parte sua, ha degli elementi particolari.
+\begin_inset Formula 
+\[
+atk=\frac{avg_{goal/squadra}}{avg_{goal/campionato}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Il numero di gol medio per partita è 2.56 nell'ultima Premier League; se
- confrontato, ad esempio, con il basket, il numero di punti medio per partita
- è [cerca statistica], molto molto molto maggiore; idem per il rugby, per
- il football americano e così via.
- È una caratteristica molto importante: ogni gol segnato nel calcio vale
- inoltre un solo punto: ogni gol ha eguale importanza, indipendentemente
- dalla distanza del tiro, dal minutaggio, dal modo in cui si è colpita la
- palla...
- al contrario del basket, dove un tiro libero vale un punto, un tiro nell'area
- vale due e da fuori vale 3, oppure del rugby una meta vale 5, un calcio
- piazzato dopo un fallo vale 3, un calcio piazzato dopo una meta vale due,
- e così via.
- Il numero di punti, e di conseguenza il modo in cui questi punti sono distribui
-ti, segna già un momento di distacco del calcio da altri sport: nel calcio,
- ad ogni gol corrisponde un punto: questo elemento dà una 
+La difesa deve invece rappresentare l'efficacia del comparto difensivo di
+ una squadra, e si misura similmente all'attacco con la differenza che si
+ tiene conto dei goal subiti, non di quelli segnati; più alto è il rapporto,
+ maggiore è il numero di gol subiti dalla squadra rispetto alla media.
+ In formula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+dif=\frac{avg_{goalsubiti/squadra}}{avg_{goalsubiti/campionato}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Come ho accennato prima, bisogna sempre tener conto del 
 \begin_inset Quotes eld
 \end_inset
 
-spinta
+fattore campo
 \begin_inset Quotes erd
 \end_inset
 
- alla casualità, perché (come succede talvolta) una piccola squadra di provincia
- può battere 1-0 una squadra campione nazionale, pur essendoci stata un'enorme
- disparità nel numero di azioni create.
- Si è un po' più soggetti alla casualità nel calcio che in altri sport anche
- per questo motivo.
- [approfondisci]
+.
+ Se una squadra gioca in casa, 
+\begin_inset Formula $atk$
+\end_inset
+
+ sarà calcolato con la media dei goal segnati 
+\emph on
+in casa
+\emph default
+, mentre 
+\begin_inset Formula $def$
+\end_inset
+
+ con la media dei goal subiti 
+\emph on
+in trasferta
+\emph default
+.
+ Dobbiamo quindi tener conto di 4 variabili per quanto riguarda la partita
+ Squadra1 - Squadra2:
 \end_layout
 
 \begin_layout Standard
-Di per sé, questo è un motivo già molto importante di casualità.
- Un gol può scaturire da qualsiasi cosa: un azione personale, un tiro dalla
- distanza, un errore della difesa, un contropiede; azioni difficili da prevedere
- in anticipo, potenzialmente sfruttabili da qualsiasi squadra di provincia
- così come di levatura internazionale.
+\begin_inset Formula 
+\[
+\lambda_{1}=atk_{1h}\cdot dif_{2t}\cdot avg_{goal_{h}/campionato}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda_{2}=atk_{2t}\cdot dif_{1h}\cdot avg_{goal_{t}/campionato}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dove h sta per home (= in casa) e t sta per trasferta.
+\end_layout
+
+\begin_layout Subsubsection
+Una partita d'esempio: Leicester - Manchester Utd.
+\end_layout
+
+\begin_layout Standard
+Calcoliamo i lambda per la partita in questione utilizzando i valori evidenziati
+ nella tabella 1 (ricordiamo che in questo esempio il Leicester gioca in
+ casa):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+atk_{LFC_{H}}=\frac{1.47}{1.47368}\approx0.99\quad\quad def_{LFC_{H}}=\frac{1.16}{1.09210}\approx1.06
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+atk_{MAN_{T}}=\frac{1.11}{1.47368}\approx0.75\quad\quad def_{MAN_{T}}=\frac{1.16}{1.09210}\approx1.06
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda_{lfc}=0.99\cdot1.06\cdot1.47368=1.54\qquad\lambda_{man}=0.75\cdot1.06\cdot1.0921=0.89
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'allegato 2 mostra quindi la tabella delle probabilità per la partita:
+ il risultato più probabile è 1-0 per il Leicester!
+\end_layout
+
+\begin_layout Standard
+Sembra strano che il risultato più probabile sia in favore del Leicester;
+ in realtà, esso può essere giustificato dal fatto che il Manchester, nella
+ stagione 2014-2015, sia stato piuttosto debole nelle partite in trasferta:
+ il rendiconto, infatti, è di cinque vittorie, 9 pareggi e quattro sconfitte
+ fuori casa.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename documenti/tesi/lfc-mutd.jpg
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Simulare un intero campionato
+\end_layout
+
+\begin_layout Standard
+Simulare un intero campionato è molto semplice: basta ripetere il procedimento
+ seguito fin'ora per tutte le partite del calendario.
+\end_layout
+
+\begin_layout Standard
+Vi è una tuttavia una piccola modifica da apportare.
+ Come ho premesso ad inizio capitolo, il calcio è anche casualità: un goal
+ può nascere da un improvviso contropiede, da un tiro da lontano, dalla
+ giocata di un singolo.
+ Le partite non finiscono tutte come sono pronosticate prima della partita:
+ bisogna dare un velo di casualità ai risultati.
+\end_layout
+
+\begin_layout Standard
+Per far ciò, ho scritto una funzione che permette, a partire dalle probabilità
+ calcolate qui sopra, di ritornare un numero casuale che si uniforma alla
+ distribuzione di Poisson.
+ Qui di seguito, in pseudocodice:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "numbers=left"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+definisci RandomNumberPoisson (lambda)
+\end_layout
+
+\begin_layout Plain Layout
+
+	limite = e ^ (- lambda)
+\end_layout
+
+\begin_layout Plain Layout
+
+	goal = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+	p = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	while (p > limite):
+\end_layout
+
+\begin_layout Plain Layout
+
+		goal = goal + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+		p = p * random(0,1)
+\end_layout
+
+\begin_layout Plain Layout
+
+	return (k - 1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In pratica:
+\end_layout
+
+\begin_layout Itemize
+Questa funzione prende come input il lambda di una squadra e stabilisce
+ come valore limite 
+\begin_inset Formula $e^{-\lambda}$
+\end_inset
+
+(si noti che questo è un numero in pratica sempre minore di 1 e che è più
+ piccolo quanto più grande è lambda)
+\end_layout
+
+\begin_layout Itemize
+Si inizializza quindi un ciclo while, che per ogni iterazione moltiplica
+ p per un numero casuale da 0.0 a 1.0 e aggiunge 1 al numero di goal
+\end_layout
+
+\begin_layout Itemize
+Quando p sarà minore di 
+\begin_inset Formula $e^{-\lambda}$
+\end_inset
+
+, allora la funzione ritornerà k-1, ovvero il numero di goal di quella partita.
+\end_layout
+
+\begin_layout Standard
+Con questo piccolo accorgimento, posso iniziare a simulare stagioni calcistiche.
 \end_layout
 
 \begin_layout Subsection
-Elementi di non causalità
+Simulazione della stagione 2015-2016
 \end_layout
 
 \begin_layout Standard
-Fin'ora si è parlato di una singola partita.
- Sappiamo, tuttavia, che una manifestazione calcistica è organizzata secondo
- tornei, i quali possono essere a gironi, ad eliminazione diretta o una
- combinazione di entrambi.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+['Chelsea', 77] 
 \end_layout
 
-\begin_layout Standard
-Un torneo ad eliminazione diretta è soggetto a grande casualità, ed è abbastanza
- evidente il motivo: se si concorda che la vittoria di una squadra non è
- necessariamente collegata al passato statistico della stessa (i.e.
- una squadra piccola per una botta di culo può vincere tranquillamente una
- partita), si capisce che la vincintrice di un torneo non è necessariamente
- la più brava o la più in forma, anche se spesso può essere così.
+\begin_layout Plain Layout
+
+['Man City', 72] 
 \end_layout
 
-\begin_layout Standard
-Il discorso è un poco più complicato per quanto riguarda un campionato standard.
- Come ho accennato prima, nel rugby una meta vale 5 + 2 punti se si realizza
- il calcio, mentre un calcio di punizione o un drop in partita vale 3 punti.
- Se abbiamo una squadra A molto più forte della squadra B, anche se per
- un colpo di fortuna B segna una meta ad inizio partita la squadra A ha
- tutto il tempo per segnare mete e per realizzare calci di punizione, con
- la squadra B che difficilmente può sperare in errori degli avversari e
- che quindi, probabilmente, soccomberà.
+\begin_layout Plain Layout
+
+['Arsenal', 69] 
 \end_layout
 
-\begin_layout Standard
-Per il calcio, una cosa simile si realizza in un campionato: nelle maggiori
- serie europee, una vittoria equivale a 3 punti, un pareggio 1 e una sconfitta
- 0.
- Questo crea una maggiore disparità, e quindi una maggiore prevedibilità
- nelle posizioni a fine stagione: chi vince ha un (piccolo) vantaggio rispetto
- a chi pareggia, e questo lo può avvantaggiare.
- Non sto dicendo nulla di nuovo: chi vince più partite vince il campionato;
- [non sto sbagliando vero?]
+\begin_layout Plain Layout
+
+['Southampton', 64] 
 \end_layout
 
-\begin_layout Subsection
-Elementi comuni
+\begin_layout Plain Layout
+
+['Man United', 62] 
 \end_layout
 
-\begin_layout Standard
-Ciclismo o nuoto, rugby o calcio, eliminazione diretta o campionato, il
- 
-\begin_inset Quotes eld
+\begin_layout Plain Layout
+
+['Liverpool', 59] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Everton', 59] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Stoke', 57] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['West Ham', 56] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Tottenham', 54] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Swansea', 53] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['West Brom', 48] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Sunderland', 47] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Burnley', 46] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Hull', 46]
+\end_layout
+
+\begin_layout Plain Layout
+
+['Newcastle', 42] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Crystal Palace', 38] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['QPR', 37] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Leicester', 35] 
+\end_layout
+
+\begin_layout Plain Layout
+
+['Aston Villa', 33]
+\end_layout
+
 \end_inset
 
-grado di casualità
-\begin_inset Quotes erd
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
- può essere diverso, ma sarebbe imprudente dire che esistono sport immuni
- dal caso, o sport totalmente dominati dal caso.
- 
+
+\end_layout
+
+\begin_layout Part
+Hume, Popper e il Leicester
 \end_layout
 
 \begin_layout Standard
-Ogni partita è decisa dal caso [caos?].
- E siccome un campionato è fatto da tante partite, un campionato può essere
- deciso dal caso.
- 
-\end_layout
+\align center
+\begin_inset Graphics
+	filename documenti/tesi/karl-popper_header.jpg.573x380_q85_crop.jpg
+	scale 50
 
-\begin_layout Standard
-È questo il caso del Leicester?
-\end_layout
-
-\begin_layout Standard
-No.
- La probabilità 
-\begin_inset Quotes eld
 \end_inset
 
-pura
-\begin_inset Quotes erd
-\end_inset
 
- che una squadra minore ha di vincere il campionato inglese è troppo bassa;
- non c'è solo fortuna dietro a tutto ciò, è evidente...
- per questo è più giusto parlare di [caos, ma anche un insieme di scetticismo
- e di non-preparazione ai cigni neri]: la storia del Leicester non è una
- curiosità statistica ma qualcosa di più: coincidenza nella qualità del
- gioco delle squadre maggiori, particolare stato di forma (fisica e umore)
- dei giocatori del LFC, oltre ad una buona dose di autoconvinzione sia dei
- giocatori del lfc sia delle altre squadre, che dopo tre mesi si trovavano
- inferiori ad una squadretta solo un anno fa relegata all zona retrocessione.
-\end_layout
-
-\begin_layout Standard
-Ciònonostante, è innegabile un fatto: nessuno potè prevedere questo surplus
- [no].
- La vittoria del Leicester è stata un fulmine a ciel sereno, sia tra gli
- appassionati di calcio sia tra i più esperti scommettitori.
- Che cosa è questa cosa? [eh?]
 \end_layout
 
 \begin_layout Section
-Il cigno nero
+Alla ricerca di un fondamento
 \end_layout
 
 \begin_layout Standard
-Nella prima stesura di questa tesina (molto precedente
+Quegli strumenti matematici che fin'ora ho portato avanti ed utilizzato
+ si sono rivelati fallaci, infine! Il ché è abbastanza preoccupante: gli
+ scommettitori professionisti utilizzano modelli sì più complicati (certamente
+ il numero di variabili studiate non si limita al numero di gol segnati/subiti,
+ ma si estenderà al numero di passaggi riusciti, al possesso palla, alla
+ forma fisica dei giocatori...) ma che, in ultima analisi, sono pur sempre
+ modelli matematici, solo varianti più complesse di quello che ho utilizzato
+ io.
+ Se neppure costoro sono riusciti a tirar fuori, dalle loro simulazioni,
+ una vittoria del Leicester, questo può voler dire una cosa: tutti i modelli,
+ in questo caso, si sarebbero rivelati fallaci, perché in realtà il problema
+ di fondo è molto più nascosto, insidioso, sottile e per trovarlo è necessario
+ ragionare “fuori dal sistema”.
+ La domanda da porsi è: su quali basi abbiamo fondato le nostre ricerche
+ matematiche e statistiche? I nostri modelli rispecchiano il mondo che vogliamo
+ studiare?
+\end_layout
+
+\begin_layout Standard
+Popper, a questo punto, avrebbe detto che le nostre teorie matematiche sulla
+ previsione delle partite di calcio sono state falsificate, perché non sono
+ state in grado di prevedere questa vittoria; purtroppo, non possiamo che
+ dargli ragione.
+ Ma cosa c'è di sbagliato nelle procedure che abbiamo utilizzato? Partiamo
+ dall'inizio, ed individuiamo due tipi di fenomeni...
+\end_layout
+
+\begin_layout Subsection
+Mediocristan ed estremistan
+\end_layout
+
+\begin_layout Standard
+Nel suo libro “Il Cigno Nero”, il filosofo N.
+ T.
+ Nassim formula la metafora di due paesi in cui gli eventi si comportano
+ in maniera differente, il Mediocristan e l'Estremistan.
+\end_layout
+
+\begin_layout Standard
+Nel primo paese regna la monotonia, la prevedibilità, la normalità.
+ Qui non ci sono singoli casi in grado di cambiare radicalmente la situazione
+ generale: ad esempio, se prendiamo un gruppo di mille persone scelte a
+ caso e per ognuna ne misuriamo l'altezza, osserveremo che sì, c'è chi è
+ più basso e chi più alto, ma tutti si stabilizzano entro un range ben determina
+to di valori.
+ Calcoliamo l'altezza media di queste mille persone, 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+; se ora alle nostre mille persone aggiungessimo la persona più alta o più
+ bassa al mondo e ricalcolassimo la media, otterremmo un valore 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ tale che
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+m_{1}\approx m_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Altri esempi di Mediocristan sono il peso di un essere umano, l'età media
+ di una nazione, le probabilità di vittoria a poker e così via; fenomeni
+ per cui un singolo risultato non può mai influenzare la media di tutti
+ i risultati.
+\end_layout
+
+\begin_layout Standard
+Il secondo regno è il regno dell'imprevedibile, dei fenomeni caotici, dell'irreg
+olarità.
+ Qui, al contrario, uno o pochi casi sono sufficienti a sovvertire una situazion
+e generale: prendiamo lo stesso gruppo di mille persone di prima e per ognuna
+ di loro ne annotiamo il reddito annuo.
+ Osserveremo delle discrete differenze già da subito, e la media 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+già “faticherà” a rappresentare bene i redditi estremi che abbiamo registrato.
+ Ma cosa succede, invece, se alle mille persone aggiungessimo il multi-miliardar
+io Bill Gates? La nuova media 
+\begin_inset Formula $m_{2}$
+\end_inset
+
+ uscirebbe pesantemente influenzata da un solo dato molto rilevante; in
+ altre parole, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+m_{1}\ll m_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All'Estremistan assegniamo, ad esempio, la media di copie vendute di un
+ libro, il denaro vinto giocando in borsa, il numero di visualizzazioni
+ di un video su Youtube, e così via; fenomeni in cui un solo risultato può
+ influenzare pesantemente la media di tutti i i risultati.
+\end_layout
+
+\begin_layout Subsection
+Errori di classificazione
+\end_layout
+
+\begin_layout Standard
+La divisione tra Mediocristan ed Estremistan inizialmente può apparire del
+ tutto arbitraria, eppure ha un fondamento nella realtà: ci sono eventi
+ prevedibili con buona approssimazione (poiché essi non possono fisiologicamente
+ andare oltre ad un certo intervallo di valori), e tra essi annoveriamo
+ alcuni fenomeni anatomici, naturali, fisici, ed eventi fondamentalmente
+ imprevedibili, tra cui annoveriamo eventi la cui natura è prettamente umana/soc
+iale e, pertanto, composta da un gran numero di variabili difficilmente
+ stimabili.
+ Dove sta allora il problema?
+\end_layout
+
+\begin_layout Standard
+Il problema, epistemologico in un certo senso, è che noi pretendiamo di
+ voler ridurre tutto al Mediocristan, anche laddove un fenomeno presenti
+ tratti caratteristici dell'Estremistan; ricerchiamo regolarità laddove
+ regna il caos, tentiamo di platonizzare, di modellizzare, di trascrivere
+ il termini matematici la realtà quando la realtà stessa è lontanissima
+ dalle eleganti formule matematiche che utilizziamo per descriverla.
+ 
+\end_layout
+
+\begin_layout Standard
+Questo, che può sembrare un problema assai astratto, è in realtà molto più
+ pratico e tangibile di quanto appaia: la crisi economica del 2008, evento
+ evidentemente dell'Estremistan, è stata forse prevista e/o presa sul serio
+ dai modelli di previsione utilizzati dagli economisti? Gli attentati dell'11
+ settembre 2001, prodotto umano e quindi dell'Estremistan, è stato previsto
+ dagli esperti di geopolitica di uno qualsiasi dei governi occidentali?
+ Il 7-1 tra Germania e Brasile dei mondiali di calcio del 2014 oppure la
+ vittoria del Leicester, eventi prettamente umani e quindi dell'Estremistan,
+ sono stato previsti da uno soltanto dei bookmaker calcistici? Siamo molto
+ bravi a stimare e prevedere gli esiti di eventi ripetitivi grazie, ad esempio,
+ a distribuzioni come quella di Poisson, ma perdiamo totalmente di vista
+ gli eventi improbabili e dalle conseguenze più significative: è come se
+ un meteorologo fosse in grado di prevedere per 364 giorni se ci sarà il
+ sole o pioverà ma non fosse in grado di prevedere l'uragano Katrina il
+ 365esimo giorno!
+\end_layout
+
+\begin_layout Subsection
+Come ci inganniamo
+\end_layout
+
+\begin_layout Standard
+Hume giustificava questa nostra tendenza a ricercare regolarità “postulato
+ della regolarità del corso naturale”: siamo abituati a pensare che la realtà
+ sia regolare (e solo grazie a questo è possibile inferire il principio
+ di causalità), ma in fin dei conti su cosa è basato questo assunto? Per
+ Hume, nessun ragionamento può giustificare una simile legge; né tantomeno
+ l'esperienza può: servirebbero infinite osservazioni di un fenomeno per
+ poter confermare che, effettivamente, una regolarità esiste.
+ Quest'idea sarà poi alla base della teoria falsificazionista proposta,
+ quasi 200 anni dopo, dal viennese Popper, che per primo conierà il termine
+ “Cigno Nero” riferendosi proprio all'evento imprevisto che spezza la regolarità
+ che noi ci aspettiamo.
+\end_layout
+
+\begin_layout Standard
+Insomma, quando vogliamo interpretare la realtà, che secondo i nostri standard
+ deve essere regolare, tendiamo ad attribuirle un ordine, una regolarità
+ che in realtà non ha alcun fondamento o riscontro nel mondo reale: questo
+ fenomeno è detto “narrativizzazione”, fenomeno studiato per la prima volta
+ da Hume stesso e poi ripreso dagli psicanalisti del '900.
+ 
+\end_layout
+
+\begin_layout Standard
+Secondo il filosofo scozzese, nella nostra mente trasformeremmo ciò che
+ è “
+\emph on
+post hoc
+\emph default
+” in “
+\emph on
+propter hoc
+\emph default
+”, daremmo ad eventi contigui nel tempo un rapporto di causa ed effetto,
+ di necessità, che in realtà non esiste.
+ Per essere più concreti, credo che basti riflettere sui nostri ricordi
+ e sul modo in cui pensiamo al nostro passato: si cercano, a posteriori,
+ ragioni per cui le cose sono andate in un certo modo, si cercano cause
+ che si adattino alla nostra visione degli eventi accaduti e li spieghino
+ nel modo più esaustivo possibile; ma gli eventi non sono mai collegati
+ da forti ed espliciti nessi causali, anzi, il mondo è molto più caotico
+ di quanto non sembri a posteriori e compiere un'operazione di narrativizzazione
+ significa, inevitabilmente, semplificare la realtà, riadattarla a nostro
+ piacimento, riscrivere la storia.
+ 
+\end_layout
+
+\begin_layout Standard
+La ricerca di ordine non è l'unica forza che ci spinge a creare narrazioni:
+ ad esempio, dare nessi di causalità ci aiuta a ricordare meglio.
+ È molto più semplice ricordare il numero 123456 invece che 832701: il primo
+ lo possiamo definire attraverso nessi causali (sono numeri in ordine decrescent
+e che differiscono di 1), il secondo, composto da numeri casuali, non segue
+ apparentemente alcun nesso logico ed è, pertanto, più difficile da ricordare.
+ 
+\end_layout
+
+\begin_layout Standard
+L'unione di questi fenomeni trova una perfetta sintesi nella vignetta in
+ figura 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename documenti/tesi/sports.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+“Un generatore di numeri casuali pesati ha appena prodotto una serie di
+ numeri.” “Usiamoli per creare narrazioni!”
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diabolicamente XKCD, l'autore della vignetta, definisce le telecronache
+ sportive come “narrazioni costruite su numeri casuali pesati”.
+ In parole povere: i risultati di una partita di calcio non sono altro che
+ numeri, pseudocasuali (è questo che “numeri casuali pesati” significa),
+ su cui ogni interpretazione è possibile e, talvolta, 
+\family typewriter
+\size footnotesize
+difficilmente attaccabile
+\family default
+\size default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A proposito di ciò (il fatto che spesso interpretazioni narrative della
+ realtà siano molto convincenti), D.
+ F.
+ Wallace scrisse nel suo monumentale Infinite Jest:
+\end_layout
+
+\begin_layout Quotation
+
+\emph on
+la validità logica di un ragionamento non ne garantisce la verità 
+\end_layout
+
+\begin_layout Quotation
+
+\size footnotesize
+\emph on
+logical validity is not a guarantee of truth
+\end_layout
+
+\begin_layout Standard
+Ogni narrazione può apparire o essere logicamente coerente e corretta, pur
+ non essendo vera.
+ Basti dare un'occhiata alla politica per una prova empirica di questo:
+ partiti di destra e sinistra muovono interpretazioni anche opposte, logicamente
+ coerenti ma non necessariamente vere, a partire dagli stessi dati.
+\end_layout
+
+\begin_layout Section
+Il Cigno Nero
+\end_layout
+
+\begin_layout Subsection
+Il Cigno Nero: tutte le bolle galleggiano
+\end_layout
+
+\begin_layout Standard
+Narrazioni, abitudine, common sense nonché l'uso di modelli platonizzanti
+ sono tutte concause che hanno portato a credere, ad inzio stagione, che
+ il Leicester non avrebbe mai potuto vincere il campionato.
+ Alla luce di quanto detto, dei bias esposti nelle pagine precedenti, non
+ poteva che andare così: d'altronde, nessuno poteva sinceramente dire che
+ una tale idea fosse inverosimile, in quel momento! Ciononostante, pochi
+ tifosi sfegatati, vuoi per fortuna vuoi per sincera passione, hanno puntato
+ piccole cifre su questa piccola squadra; a maggio hanno avuto la meglio
+ su schiere di commentatori, bookmaker, scommettitori, autorità del mondo
+ calcistico che non avrebbero mai neppure pensato ad una tale eventualità.
+ 
+\end_layout
+
+\begin_layout Standard
+Secondo la definizione di N.
+ T.
+ Nassim, Il Cigno Nero ha queste tre proprietà: è un evento isolato, che
+ non rientra nel campo delle normali aspettative è un evento dall'impatto
+ enorme nell'ambiente in cui si sviluppa è un evento di difficile comprensione:
+ nonostante la sua fama di “evento imprevedibile”, a posteriori ci ostiniamo
+ a giustificarlo razionalmente e a cercare di renderlo spiegabile e prevedibile
+ in futuro.
+\end_layout
+
+\begin_layout Standard
+La storia del Leicester incarna bene la triplice definizione di Cigno Nero,
+ nonché il fallimento di tutte le pratiche che ho descritto nelle sezioni
+ precedenti: quale che sia il motivo per cui la squadra di Ranieri è riuscita
+ ad arrivare fino in fondo, beh, rimane il fatto che la sua scalata ha,
+ agli occhi di molti, dell'incredibile.
+ Quando si semplifica troppo il mondo, d'altronde, prima o poi i problemi
+ vengono a galla; il meccanismo è lo stesso delle previsioni meteorologiche,
+ già citate: per poter prevedere che tempo farà, si utilizzano delle variabili
+ i cui valori sono approssimati a n cifre decimali; queste previsioni, che
+ sono buone entro i primi giorni, iniziano a manifestare ampie discrepanze
+ con la realtà molto presto, siccome l'errore si propaga velocemente, e
+ diventano inaffidabili in un tempo direttamente proporzionale alla precisione
+ delle variabili suddette.
+\end_layout
+
+\begin_layout Standard
+Ora, è evidente che finché si parla di calcio, questi Cigni Neri sono perlopiù
+ innocui: l' 1-7 di Brasile-Germania nel 2014 così come il Leicester quest'anno
+ non hanno causato veri danni (se non forse alle agenzie di scommesse);
+ ma come ho accennato in precedenza, avere la presunzione di conoscere ciò
+ che è imprevedibile e ignoto porta ad essere vulnerabilissimi agli effetti
+ del Cigno Nero: ancora una volta, a metà anni '90 qualcuno immaginò per
+ caso la nascita di un'azienda come Google, destinata a diventare egemone
+ nei più disparati campi dell'informatica? No, eppure la sua fondazione
+ è certamente uno dei più importanti avvenimenti degli ultimi 30 anni.
+ 
+\end_layout
+
+\begin_layout Standard
+Questo è solo un esempio, ciò che è interessante è che questo concetto si
+ può estendere più o meno a qualsiasi tecnologia, recente o antica: è impossibil
+e determinare il futuro perché esso è indissolubilmente legato allo sviluppo
+ tecnologico dell'umanità; solo se (ipotesi assurda) conoscessimo già come
+ si evolverà la tecnologia nei prossimi anni sapremmo dire, a grandi linee,
+ come sarà il futuro: ma conoscere la tecnologia futura significa essere
+ già nel futuro! 
+\end_layout
+
+\begin_layout Standard
+In definitiva: non si può prevedere un evento futuro, che si parli di tecnologia
+, di politica, di economia o di calcio, perché tutte le variabili che concorrono
+ a generarlo sono, anche esse, nel futuro; prevederle significherebbe conosce
+ tutto il futuro.
+ Parafrasando una variazione alla Legge di Murphy,
+\end_layout
+
+\begin_layout Standard
+L'imprevedibilità di un Cigno Nero è più alta di quanto ti aspetti, anche
+ tenendo conto di questa legge.
+\end_layout
+
+\begin_layout Subsection
+Il Cigno Nero del Leicester
+\end_layout
+
+\begin_layout Standard
+In ultima analisi, dare così tanta importanza alla vittoria del Leicester
+ ricamandola con considerazioni quali “è merito del coraggio dei giocatori”,
+ “è solo grazie alla loro determinazione che ce l'hanno fatta” e così via,
+ è nient'altro che creare una narrazione su numeri pseudocasuali: significa,
+ in pratica.
+ cercare a posteriori di riordinare e causalizzare, ovvero compiere gli
+ stessi errori che fin'ora abbiamo tanto contestato.
+ 
+\end_layout
+
+\begin_layout Standard
+Dopo aver riflettuto tanto, dopo aver discusso con chi conosce il calcio
+ più di me, dopo aver avuto accese discussioni e litigi con i miei amici
+ più attenti e critici sulla squadra di Ranieri, sono giunto alla conclusione
+ che capire questa vittoria del Leicester, ovvero come una squadretta di
+ provincia sia riuscita a battere squadre di campioni possedute da sceicchi
+ pieni di soldi, è fin troppo complicato per me.
+ Non pretendo di avere una risposta sul perché il Leicester abbia vinto.
+ Non posso esimermi però dal dare a questa storia un'interpretazione, forse
+ un po' romantica e che non vuole essere nulla se non un'osservazione di
+ chi è rimasto meravigliato dagli eventi dell'ultimo anno calcistico.
+ 
+\end_layout
+
+\begin_layout Standard
+Questo Leicester è un esempio magnifico di un sogno apparentemente impossibile
+ che alla fine si realizza.
+ I ragazzi di Ranieri quest'anno hanno saputo dare grandissime emozioni
+ anche a chi di calcio non è esattamente un appassionato, ed è questo infine
+ che si ricerca in uno sport, emozioni, passione e, ovviamente, divertimento.
+ 
+\end_layout
+
+\begin_layout Standard
+La storia del Leicester dimostra che i sogni si possono coronare, a prescindere
+ da ciò che qualcuno, chiunque! ti potrebbe far credere.
+ È la fiaba da raccontare ai bambini prima di andare a dormire, il ragazzino
+ che sconfigge il drago e torna a casa da eroe, è Davide contro Golia.
+ La dimostrazione che vale la pena credere in qualcosa, non importa quanto
+ utopistico questo “qualcosa” sia, perché come sarà il futuro nessuno lo
+ sa, e nessuno lo può sapere, e nessuno può impedirci di sognare.
+\end_layout
+
+\begin_layout Standard
+E proprio dei sogni parla questo aforisma di Trapattoni, con il quale voglio
+ concludere questa mia tesina:
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\emph on
+I sogni sono sogni e non peccati, ma la realtà è diversa, con i se e i ma
+ non si va lontano e più che l'acqua santa servirebbero i santi..
 \end_layout
 
 \end_body
