@@ -1,2 +1,3 @@
 # poisson-football
-attempt to simulate premier league w/ poisson distribution
+Programma di simulazione calcistica. 
+Matteo C. - AS 2015-16
